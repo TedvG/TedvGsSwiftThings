@@ -1,27 +1,71 @@
-# Feature name
+UNDER CONSTRUCTION
+
+# Additional For-Loop syntax
 
 * Proposal: [SE-NNNN](https://github.com/apple/swift-evolution/blob/master/proposals/NNNN-name.md)
-* Author(s): [Swift Developer](https://github.com/swiftdev)
+* Author(s): Ted van Gaalen
 * Status: **Awaiting review**
 * Review manager: TBD
 
 ## Introduction
 
-A short description of what the feature is. Try to keep it to a
-single-paragraph "elevator pitch" so the reader understands what
-problem this proposal is addressing.  
-
-Swift-evolution thread: [link to the discussion thread for that proposal](https://lists.swift.org/pipermail/swift-evolution)
+There is a proposal to remove the classical (C-Style) for-loop  e.g.
+   for var i= 0; i < 10;i++) 
+from the Swift language. 
+This imposes a severe limitation, because currently only the for-in loop,
+which always iterates through a collection is available. 
 
 ## Motivation
 
-Describe the problems that this proposal seeks to address. If the
-problem is that some common pattern is currently hard to express, show
-how one can currently get a similar effect and describe its
-drawbacks. If it's completely new functionality that cannot be
-emulated, motivate why this new functionality would help Swift
-developers create better Swift code.
+In technical and scientific programming, one often encounters loops
+based on iterating and changing numerical values (e.g. floats, integers, doubles)
+varying values from positive to negative or reversed with arbitrary
+step sizes which also could be positive and negative, and 
+not bound to or based on collections or arrays.. 
+For example:
 
+ 
+
+        let w:Float = 20
+        let h:Float = 5
+        let l:Float = 5
+        
+        for var x:Float = -60;    x < 60;    x += w * 1.2
+        {
+            for var y:Float = -30;    y < 60;    y += h * 1.2
+            {
+               let pos = SCNVector3(x: x,   y: y,   z: z)
+                
+                let tile = TGStaticTile(pos: pos,
+                                w:  CGFloat(w), h: CGFloat(h), l: CGFloat(l),
+                                color: UIColor.randomColor(), naam: "Tile\(tiles.count + 1)")
+
+                tiles.append(tile)
+           }
+        }
+    
+When the classical for ;; is no longer available 
+one either needs to fall back on using do-while control statements
+or use the  for... in... method like so:
+
+let w = 20.0
+let h = 5.0
+    
+for var x in (-60.0).stride(to: 60.0, by:  w * 1.2)
+{
+    for var y in (30.0).stride(to: -60.0, by:  -h * 1.2)
+    {
+        print("x = \(x)    y = \(y)")
+    }
+}
+
+
+
+
+
+    
+    
+    
 ## Proposed solution
 
 Describe your solution to the problem. Provide examples and describe
